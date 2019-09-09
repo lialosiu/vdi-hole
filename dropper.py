@@ -35,14 +35,17 @@ def watch_clipboard():
             # label = tkinter.Label(text=recent_value)
             # label.pack()
 
-            qr_code = get_qr_code(base64.b64encode(zlib.compress(recent_value.encode('utf-8'))))
-
-            img_tk = ImageTk.PhotoImage(qr_code)
-
-            show_image(img_tk)
+            try:
+                qr_code = get_qr_code(base64.b64encode(
+                    zlib.compress(recent_value.encode('utf-8'))))
+            except qrcode.exceptions.DataOverflowError as e:
+                print(e)
+                continue
+            else:
+                img_tk = ImageTk.PhotoImage(qr_code)
+                show_image(img_tk)
 
         time.sleep(1)
-
 
 def get_qr_code(text):
     qr = qrcode.QRCode(

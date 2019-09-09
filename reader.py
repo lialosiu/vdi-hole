@@ -17,7 +17,7 @@ def main():
             text = bytes.decode(zlib.decompress(base64.b64decode(code.raw)), 'utf-8')
             print(text)
             pyperclip.copy(text)
-        time.sleep(1)
+        time.sleep(.5)
 
 
 if __name__ == '__main__':
